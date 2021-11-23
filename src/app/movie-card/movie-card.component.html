@@ -1,0 +1,46 @@
+<div class="nav-bar" role="banner">
+    <div class="headline">Welcome to myFlix!</div>
+
+    <span class="nav-actions">
+        <button mat-raised-button (click)="viewProfile()" class="nav-btn" color="primary">
+            Profile
+        </button>
+        <button mat-raised-button (click)="logout()" class="nav-btn" color="primary">
+            Logout
+        </button>
+    </span>
+
+</div>
+
+<div class="movie-card">
+    <mat-card *ngFor="let movie of movies;" style="flex: 1 1 auto;">
+        <mat-card-header>
+            <mat-card-title>{{movie.Title}}</mat-card-title>
+            <mat-card-subtitle>Directed by: {{movie.Director.Name}}</mat-card-subtitle>
+        </mat-card-header>
+        <img src={{movie.ImagePath}} alt={{movie.Title}} />
+        <mat-card-actions>
+            <button mat-raised-button (click)="openDesciptionCard(movie.Title, movie.Description)" color="primary">
+                Description
+            </button>
+            <button mat-raised-button (click)="openDirectorCard(movie.Director.Name, movie.Director.Bio)"
+                color="primary">
+                Director
+            </button>
+            <button mat-raised-button (click)="openGenreCard(movie.Genre.Name, movie.Genre.Description)"
+                color="primary">
+                Genre
+            </button>
+
+        </mat-card-actions>
+        <mat-card-actions>
+            <button class="favorite-button" mat-icon-button (click)="addToFavourites(movie._id, movie.Title)"
+                color="warn" aria-label="Add movie to favorites button">
+                Add
+                <mat-icon>
+                    favorite
+                </mat-icon>
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</div>

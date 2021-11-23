@@ -1,0 +1,69 @@
+<mat-card class="user-profile-modal">
+
+    <button class="close" mat-icon-button [mat-dialog-close]="true">
+        <mat-icon>close</mat-icon>
+    </button>
+
+    <mat-card-header class="header">
+        <mat-card-title>Your profile</mat-card-title>
+        <mat-card-subtitle>Username: {{user.username}}</mat-card-subtitle>
+        <mat-card-subtitle>Email: {{user.email}}</mat-card-subtitle>
+        <mat-card-subtitle>Birthday: {{user.birthday}}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+        <mat-card-title class="header">Your favourite Movies:</mat-card-title>
+        <div class="favourites-container">
+            <div class="favourite-card">
+                <mat-card class="favourite" *ngFor="let favourite of favourites;">
+                    <img class="favourite-img" src={{favourite.ImagePath}} alt={{favourite.Title}} />
+                    <div class="favourite-title">
+                        <mat-card-title>{{favourite.Title}}</mat-card-title>
+                    </div>
+                    <button class="favorite-button" mat-icon-button
+                        (click)="removeFromFavourites(favourite._id, favourite.Title)" color="warn"
+                        aria-label="Remove movie from favourites button">
+                        Remove
+                        <mat-icon>
+                            favorite_border
+                        </mat-icon>
+                    </button>
+
+                </mat-card>
+            </div>
+        </div>
+    </mat-card-content>
+
+    <mat-card-content>
+        <h2>Change your user data:</h2>
+        <form>
+            <mat-form-field class="form-field">
+                <input matInput [(ngModel)]="userData.username" placeholder='username' type="text" name="username"
+                    required>
+            </mat-form-field>
+            <p class="warning">Username can't be changed. Please type in your current one!</p>
+            <mat-form-field class="form-field">
+                <input matInput [(ngModel)]="userData.password" type="password" placeholder="Password" name="Password"
+                    required>
+            </mat-form-field>
+            <mat-form-field class="form-field">
+                <input matInput [(ngModel)]="userData.email" type="email" placeholder='Email' name="Email" required>
+            </mat-form-field>
+            <mat-form-field class="form-field">
+                <input matInput [(ngModel)]="userData.birthday" type="date" placeholder='Birthday' name="Birthday">
+            </mat-form-field>
+            <mat-card-actions class="button-wrapper">
+                <button mat-raised-button (click)="updateUser()" color="primary" type="submit">
+                    Save changes
+                </button>
+            </mat-card-actions>
+        </form>
+    </mat-card-content>
+
+    <mat-card-actions class="button-wrapper">
+        <button mat-raised-button (click)="deleteUser()" color="warn">
+            DELETE ACCOUNT
+        </button>
+        <p class="warning">Deleting this account is permanent!</p>
+    </mat-card-actions>
+</mat-card>
